@@ -13,6 +13,5 @@ public class TransactionConfig {
     @Bean
     public PlatformTransactionManager add(MongoDatabaseFactory mongoDbFactory){
         return new MongoTransactionManager(mongoDbFactory);
-
     }
 }
