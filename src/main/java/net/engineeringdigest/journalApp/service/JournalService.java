@@ -33,7 +33,7 @@ public class JournalService {
 
     public boolean saveJournal(Journal journalEntry) {
         Journal savedEntry = journalEntryRepo.save(journalEntry);
-
+        
         return true;
     }
 

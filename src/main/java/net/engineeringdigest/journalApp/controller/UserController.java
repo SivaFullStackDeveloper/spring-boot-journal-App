@@ -8,10 +8,10 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.beans.Encoder;
@@ -21,14 +21,14 @@ import java.util.List;
 import java.util.Optional;
 
 
-@RestController()
+@RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
-    private static  final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    //private static  final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/all")
     public List<User> getAll() {
@@ -38,7 +38,7 @@ public class UserController {
 
     @PostMapping("/createUser")
     public Optional<User> createUser(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+       // user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("user"));
         return userService.saveUser(user);
     }
@@ -46,12 +46,12 @@ public class UserController {
 
     @PutMapping("/updateUser")
     public ResponseEntity<?> updateUser(@RequestBody User user) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       String userName =  authentication.getName();
-        User userInDb = userService.findByUserName(userName);
+        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      // String userName =  authentication.getName();
+        User userInDb = userService.findByUserName(user.getUserName());
         if(userInDb!=null || userInDb.toString()!=""){
             userInDb.setUserName(user.getUserName());
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            //user.setPassword(passwordEncoder.encode(user.getPassword()));
             Optional<User> savedUser =userService.saveUser(userInDb);
             return new ResponseEntity<>(savedUser, HttpStatus.NOT_FOUND);
         }
@@ -66,8 +66,8 @@ public class UserController {
 
     @DeleteMapping("/deleteById/{myId}")
     public void userDeleteById(@PathVariable ObjectId myId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        userRepo.deleteByUserName(authentication.getName());
+        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       // userRepo.deleteByUserName(authentication.getName());
          userService.userDeleteById(myId);
     }
 
