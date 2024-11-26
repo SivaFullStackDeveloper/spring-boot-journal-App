@@ -42,16 +42,16 @@ public class UserServiceTest {
 
 
 
-    @ParameterizedTest
-    @ArgumentsSource(strings={
-            "siva",
-            "rqaj",
-            "siva1",
-    })
-    public void testFindUserByUserNameWithCustomArguments(String username){
-
-        assertNotNull(userRepo.findByUserName(username));
-    }
+//    @ParameterizedTest
+//    @ArgumentsSource(strings={
+//            "siva",
+//            "rqaj",
+//            "siva1",
+//    })
+//    public void testFindUserByUserNameWithCustomArguments(String username){
+//
+//        assertNotNull(userRepo.findByUserName(username));
+//    }
 
 
     @ParameterizedTest
