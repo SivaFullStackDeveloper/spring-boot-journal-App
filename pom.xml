@@ -14,8 +14,10 @@
 	<name>Journal App</name>
 	<description>E2EE Journal App</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
+		<sonar.login>sqa_26a44d875891efb358a3b9c06e48beaf58af8456</sonar.login>
 	</properties>
+
 	<dependencies>
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
@@ -43,16 +45,41 @@
 				<version>1.18.34</version>
 				<scope>provided</scope>
 			</dependency>
-
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.2.6</version> <!-- Use the appropriate version -->
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.6</version> <!-- Use the appropriate version -->
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.10.1</version> <!-- Ensure using a recent version -->
+				<configuration>
+					<source>17</source>
+					<target>17</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.9.1.2184</version> <!-- Ensure you are using a compatible version -->
+			</plugin>
 		</plugins>
 	</build>
+
 
 </project>

@@ -15,10 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.beans.Encoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
@@ -49,13 +46,14 @@ public class UserController {
         //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
       // String userName =  authentication.getName();
         User userInDb = userService.findByUserName(user.getUserName());
-        if(userInDb!=null || userInDb.toString()!=""){
-            userInDb.setUserName(user.getUserName());
-            //user.setPassword(passwordEncoder.encode(user.getPassword()));
-            Optional<User> savedUser =userService.saveUser(userInDb);
-            return new ResponseEntity<>(savedUser, HttpStatus.NOT_FOUND);
+        if (userInDb == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
-      return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+
+        userInDb.setUserName(user.getUserName());
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Optional<User> savedUser =userService.saveUser(userInDb);
+        return new ResponseEntity<>(savedUser, HttpStatus.NOT_FOUND);
     }
 
 
