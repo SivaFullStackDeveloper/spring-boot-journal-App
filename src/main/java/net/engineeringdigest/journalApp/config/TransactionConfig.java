@@ -15,8 +15,5 @@ public class TransactionConfig {
     public PlatformTransactionManager add(MongoDatabaseFactory mongoDbFactory){
         return new MongoTransactionManager(mongoDbFactory);
     }
-    @Bean
-    public RestTemplate restTemplate(RestTemplate restTemplate) {
-       return new RestTemplate();
-    }
+
 }
