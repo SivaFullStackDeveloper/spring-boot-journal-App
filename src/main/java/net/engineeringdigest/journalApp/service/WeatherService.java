@@ -16,8 +16,11 @@ public class WeatherService {
     private RestTemplate restTemplate;
 
 
+
+
     @PostConstruct
     public  void getApiWeather() {
+
         String finalApiUrl = "https://jsonplaceholder.typicode.com/todos/1";
         var response = restTemplate.exchange(finalApiUrl, HttpMethod.GET,null,String.class);
         System.out.println(response.getBody());
