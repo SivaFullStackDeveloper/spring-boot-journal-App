@@ -69,4 +69,10 @@ public class UserController {
          userService.userDeleteById(myId);
     }
 
+
+    @GetMapping("/greetings")
+    public ResponseEntity<?> greeting(){
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
